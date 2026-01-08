@@ -1,6 +1,16 @@
 [
-    "debug", "dir", "dirxml", "error", "group", "groupCollapsed", "groupEnd",
-    "info", "log", "table", "time", "timeEnd", "timeLog", "timeStamp", "trace",
+    "assert",
+    "clear",
+    "count", "countReset",
+    "debug",
+    "dir", "dirxml",
+    "error", "exception",
+    "group", "groupCollapsed", "groupEnd",
+    "info", "log",
+    "profile", "profileEnd",
+    "table",
+    "time", "timeEnd", "timeLog", "timeStamp",
+    "trace",
     "warn"
 ]
 .forEach(method =>
