@@ -1,0 +1,44 @@
+:root, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+main {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #010409;
+
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+
+    > div {
+        --background: #0d1117;
+        --foreground: #e6edf3;
+
+        background-color: var(--background);
+        color: var(--foreground);
+
+        padding: 8px;
+
+        &.log {
+            --foreground: #79c0ff;
+        }
+    
+        &.info {
+            --foreground: #d2a8ff;
+        }
+    
+        &.debug {
+            --foreground: #56d364;
+        }
+    
+        &.warn {
+            --foreground: #e3b341;
+        }
+    
+        &.error {
+            --foreground: #ffa198;
+        }
+    }
+}

@@ -11,4 +11,4 @@
         })
 );
 
-window.addEventListener("error", event => window.alert(event.message));
+window.addEventListener("error", event => console.error(event.message));

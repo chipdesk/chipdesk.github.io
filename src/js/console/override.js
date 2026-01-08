@@ -1,10 +1,15 @@
 const consoleElement = document.getElementsByTagName("main")[0];
 
-const escapeHTML = string =>
-    string.replace(
-        /[\u00A0-\u9999<>\&]/g,
-        char => `&#${char.charCodeAt(0)};`
-    );
+const escapeHTML = (string) => string
+.replace(
+    /[\u00A0-\u9999<>\&]/g,
+    char => `&#${char.charCodeAt(0)};`
+);
+
+const stringify = (...messages) => messages
+.map(
+    item => escapeHTML(item.toString())
+).join(" ")
 
 function output(className, content) {
     const element = document.createElement("div");
@@ -12,11 +17,6 @@ function output(className, content) {
     element.innerHTML = content;
     consoleElement.append(element);
 }
-
-const stringify = (...messages) =>
-    messages.map(
-        item => escapeHTML(item.toString())
-    ).join(" ")
 
 // Console methods
 
