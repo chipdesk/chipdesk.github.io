@@ -45,3 +45,10 @@ logger.assert = (assertion, ...message) => {
     logger[method] = () =>
         logger.warn(`The console method "${method}" is not supported.`)
 );
+
+// Use logger when message
+
+window.addEventListener("message", ({ data }) =>
+    logger[data.method](...data.args)
+);
+
