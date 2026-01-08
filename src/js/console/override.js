@@ -9,7 +9,7 @@ const escapeHTML = (string) => string
 const stringify = (...messages) => messages
 .map(
     item => escapeHTML(item.toString())
-).join(" ")
+).join(" ") || "&nbsp";
 
 function output(className, content) {
     const element = document.createElement("div");
@@ -35,6 +35,7 @@ logger.assert = (assertion, ...message) => {
 }
 
 [
+    "count", "countReset",
     "dir", "dirxml",
     "group", "groupCollapsed", "groupEnd",
     "table",
