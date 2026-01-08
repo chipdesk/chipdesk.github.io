@@ -1,0 +1,25 @@
+:root, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "monaco display"
+        "monaco console"
+    ;
+
+    width: 100%;
+    height: 100%;
+
+    @panels: monaco, display, console;
+
+    each(@panels, {
+        #@{value} { grid-area: @value }
+    });
+}

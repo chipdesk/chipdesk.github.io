@@ -1,18 +1,24 @@
+import * as Monaco from "monaco-editor/esm/vs/editor/editor.api";
+
 const modifierKey =
     /Macintosh/.test(navigator.userAgent)
     ? "Meta" : "Control";
     
 window.addEventListener("load", () => {
-    const input = document.getElementById("input");
+    const editor = Monaco.editor.create(document.getElementById("monaco"), {
+        language: "javascript",
+        minimap: {
+            enabled: false
+        }
+    });
+
     const display = document.getElementById("display").contentDocument;
     const logs = document.getElementById("console");
     
-    input.addEventListener("keydown", event => {
-        if (event.getModifierState(modifierKey) && event.code === "Enter") {
-            event.preventDefault();
-            executeInput(input.value);
-        }
-    });
+    editor.addCommand(
+        Monaco.KeyMod.CtrlCmd | Monaco.KeyCode.Enter,
+        () => executeInput(editor.getValue())
+    );
 
     function executeInput(input) {
         const oldScript = display.getElementById("execute");
