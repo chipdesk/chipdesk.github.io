@@ -1,7 +1,11 @@
+fetch("https://raw.githubusercontent.com/brijeshb42/monaco-themes/refs/heads/master/themes/GitHub%20Dark.json")
+.then(response => response.json())
+.then(theme => monaco.editor.defineTheme("github-dark", theme));
+
 window.addEventListener("load", async () => {
     const editor = monaco.editor.create(document.getElementById("monaco"), {
         language: "javascript",
-        theme: "vs-dark",
+        theme: "github-dark",
         minimap: {
             enabled: false
         }
