@@ -1,7 +1,16 @@
-import * as Monaco from "monaco-editor/esm/vs/editor/editor.api";
-    
+require.config({ 
+    paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs' } 
+});
+
+require(['vs/editor/editor.main'], function() {
+    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+        target: monaco.languages.typescript.ScriptTarget.ES2020,
+        lib: ["es2020", "dom"]
+    });
+});
+
 window.addEventListener("load", () => {
-    const editor = Monaco.editor.create(document.getElementById("monaco"), {
+    const editor = monaco.editor.create(document.getElementById("monaco"), {
         language: "javascript",
         theme: "vs-dark",
         minimap: {
@@ -13,7 +22,7 @@ window.addEventListener("load", () => {
     const logs = document.getElementById("console");
     
     editor.addCommand(
-        Monaco.KeyMod.CtrlCmd | Monaco.KeyCode.Enter,
+        monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
         () => executeInput(editor.getValue())
     );
 
