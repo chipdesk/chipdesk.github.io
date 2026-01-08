@@ -1,16 +1,16 @@
 [
     "assert",
     "clear",
-    "count", "countReset",
+    "count", "countReset", // todo
     "debug",
-    "dir", "dirxml",
+    "dir", "dirxml", // todo
     "error", "exception",
-    "group", "groupCollapsed", "groupEnd",
+    "group", "groupCollapsed", "groupEnd", // todo
     "info", "log",
     "profile", "profileEnd",
-    "table",
-    "time", "timeEnd", "timeLog", "timeStamp",
-    "trace",
+    "table", // todo
+    "time", "timeEnd", "timeLog", "timeStamp", // todo
+    "trace", // todo
     "warn"
 ]
 .forEach(method =>

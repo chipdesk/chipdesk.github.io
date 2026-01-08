@@ -1,4 +1,4 @@
-const consoleElement = document.getElementsByTagName("main")[0];
+const display = document.getElementsByTagName("main")[0];
 
 const escapeHTML = (string) => string
 .replace(
@@ -15,7 +15,7 @@ function output(className, content) {
     const element = document.createElement("div");
     element.className = className;
     element.innerHTML = content;
-    consoleElement.append(element);
+    display.append(element);
 }
 
 // Console methods
@@ -32,7 +32,11 @@ logger.assert = (assertion, ...message) => {
     if (!assertion) {
         output("error", "Assertion failed: " + stringify(...message));
     }
-}
+};
+
+logger.clear = () => {
+    display.innerHTML = "";
+};
 
 [
     "count", "countReset",
@@ -47,7 +51,7 @@ logger.assert = (assertion, ...message) => {
         logger.warn(`The console method "${method}" is not supported yet.`)
 );
 
-[ "profile", "profileEnd" ]
+[ "exception", "profile", "profileEnd" ]
 .forEach(method =>
     logger[method] = () =>
         logger.warn(`The console method "${method}" is not supported.`)
