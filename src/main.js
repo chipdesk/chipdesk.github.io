@@ -1,12 +1,9 @@
 import * as Monaco from "monaco-editor/esm/vs/editor/editor.api";
-
-const modifierKey =
-    /Macintosh/.test(navigator.userAgent)
-    ? "Meta" : "Control";
     
 window.addEventListener("load", () => {
     const editor = Monaco.editor.create(document.getElementById("monaco"), {
         language: "javascript",
+        theme: "vs-dark",
         minimap: {
             enabled: false
         }

@@ -5,7 +5,7 @@ import monacoEditor from "vite-plugin-monaco-editor";
 export default [
     removeSrc(),
 
-    monacoEditor({
+    monacoEditor.default({
         languageWorkers: [ "typescript" ]
     })
 ];
