@@ -34,7 +34,13 @@ logger.assert = (assertion, ...message) => {
     }
 }
 
-[ "dir", "dirxml", "group", "groupCollapsed", "groupEnd", "table", "time", "timeEnd", "timeLog", "timeStamp", "trace" ]
+[
+    "dir", "dirxml",
+    "group", "groupCollapsed", "groupEnd",
+    "table",
+    "time", "timeEnd", "timeLog", "timeStamp",
+    "trace"
+]
 .forEach(method =>
     logger[method] = () =>
         logger.warn(`The console method "${method}" is not supported yet.`)
