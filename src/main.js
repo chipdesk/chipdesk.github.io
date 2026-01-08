@@ -1,4 +1,11 @@
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
+    await (async () => {
+        while (!window.monacoReady) {
+            await new Promise(res => setTimeout(res, 100));
+            continue;
+        }
+    })();
+
     const editor = monaco.editor.create(document.getElementById("monaco"), {
         language: "javascript",
         theme: "vs-dark",
