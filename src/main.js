@@ -1,11 +1,11 @@
-fetch("https://raw.githubusercontent.com/brijeshb42/monaco-themes/refs/heads/master/themes/GitHub%20Dark.json")
-.then(response => response.json())
-.then(theme => monaco.editor.defineTheme("github-dark", theme));
+await fetch("https://raw.githubusercontent.com/chipdesk/chipdesk.github.io/main/src/res/theme/github-dark-default.json")
+    .then(response => response.json())
+    .then(theme => monaco.editor.defineTheme("github-dark-default", theme));
 
 window.addEventListener("load", async () => {
     const editor = monaco.editor.create(document.getElementById("monaco"), {
         language: "javascript",
-        theme: "github-dark",
+        theme: "github-dark-default",
         minimap: {
             enabled: false
         }
