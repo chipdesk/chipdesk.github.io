@@ -17,17 +17,21 @@ main {
     flex-direction: column;
     align-items: end;
     overflow-y: scroll;
+    overflow-x: hidden;
 
     > div {
         --background: #0d1117;
         --foreground: #e6edf3;
 
-        background-image: linear-gradient(to bottom, #000 -50%, var(--background) 150%);
+        background-image: linear-gradient(to bottom, #000 -200%, var(--background) 300%);
         background-size: cover;
         color: var(--foreground);
 
         width: 100%;
         padding: 8px;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        word-break: break-word;
 
         &.log {
             --background: #0969da; // dark
