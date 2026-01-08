@@ -15,7 +15,8 @@ export default defineConfig({
             input: [
                 ...glob.sync("src/**/*.html")
             ]
-        }
+        },
+        minify: false
     },
     css: {
         devSourcemap: true
