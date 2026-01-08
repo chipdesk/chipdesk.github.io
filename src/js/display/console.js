@@ -16,8 +16,11 @@
 .forEach(method =>
     console[method] = (...args) =>
         parent.postMessage({
-            action: "console",
-            forward: { method, args }
+            recipient: "console",
+            forward: {
+                action: "method",
+                method, args
+            }
         })
 );
 

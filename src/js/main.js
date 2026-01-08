@@ -11,24 +11,26 @@ window.addEventListener("load", async () => {
         }
     });
 
-    const display = document.getElementById("display").contentDocument;
+    const display = document.getElementById("display");
     const logs = document.getElementById("console");
     
     editor.addCommand(
         monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-        () => executeInput(editor.getValue())
+        () => display.contentWindow.postMessage({
+            action: "execute",
+            content: editor.getValue(),
+            script: {
+                module: false,
+                iife: "async"
+            }
+        })
     );
 
-    function executeInput(input) {
-        const oldScript = display.getElementById("execute");
-        const newScript = display.createElement("script");
-        newScript.setAttribute("id", "execute");
-        newScript.innerHTML = input;
-        oldScript.replaceWith(newScript);
-    }
-
     window.addEventListener("message", ({ data }) => {
-        if (data.action === "console")
-            logs.contentWindow.postMessage(data.forward);
+        if (data.recipient) switch (data.recipient) {
+            case "console": {
+                logs.contentWindow.postMessage(data.forward);
+            } break;
+        }
     });
 });

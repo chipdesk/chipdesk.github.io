@@ -57,5 +57,14 @@ main {
             --background: #a40e26; // bright
             --foreground: #ffa198; // bright
         }
+
+        &.return {
+            --background: #57606a; // bright
+            --foreground: #b1bac4; // dark
+
+            &::before {
+                content: "-> ";
+            }
+        }
     }
 }

@@ -7,9 +7,8 @@ const escapeHTML = (string) => string
 );
 
 const stringify = (...messages) => messages
-.map(
-    item => escapeHTML(item.toString())
-).join(" ") || "&nbsp";
+.map(item => escapeHTML(item.toString()))
+.join(" ") || "&nbsp";
 
 function output(className, content) {
     const element = document.createElement("div");
@@ -59,7 +58,14 @@ logger.clear = () => {
 
 // Use logger when message
 
-window.addEventListener("message", ({ data }) =>
-    logger[data.method](...data.args)
-);
+window.addEventListener("message", ({ data }) => {
+    switch (data.action) {
+        case "method": {
+            logger[data.method](...data.args);
+        } break;
+        case "return": {
+            output("return", stringify(data.content ?? "undefined"));
+        } break;
+    }
+});
 
