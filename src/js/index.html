@@ -17,7 +17,7 @@
             <label>
                 IIFE
                 <select id=":options.iife">
-                    <option value="top level">Top-level</option>
+                    <option value="top-level">Top-level</option>
                     <option value="sync">Sync</option>
                     <option value="async">Async</option>
                 </select>
@@ -32,18 +32,18 @@
                 getWorker: () =>
                     new Worker("data:text/javascript;charset=utf-8," + encodeURIComponent(`
                         self.MonacoEnvironment = {
-                            baseUrl: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/'
+                            baseUrl: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/"
                         };
-                        importScripts('https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/base/worker/workerMain.js');
+                        importScripts("https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/base/worker/workerMain.js");
                     `))
             };
 
             require.config({ 
-                paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs' } 
+                paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs" } 
             });
             
             window.monacoPromise = new Promise(resolve => {
-                require(['vs/editor/editor.main'], () => {
+                require(["vs/editor/editor.main"], () => {
                     monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
                         target: monaco.languages.typescript.ScriptTarget.ES2020,
                         allowNonTsExtensions: true,

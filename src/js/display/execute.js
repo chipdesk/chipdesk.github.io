@@ -15,7 +15,7 @@ window.addEventListener("message", ({ data }) => {
             case "sync":
                 prefix = `Promise.resolve((${keyword}() => {\n\n`;
                 suffix = `\n\n})()).then(item => parent.postMessage({ recipient: "console", forward: { action: "return", content: item }}));`;
-            case "top level":
+            case "top-level":
                 newScript.innerHTML = `\n${prefix}${data.content}${suffix}\n`;
         }
         
