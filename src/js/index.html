@@ -4,23 +4,8 @@
     <title>Chipdesk</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/loader.js"></script>
-    <script>
-        require.config({ 
-            paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs' } 
-        });
-        
-        require(['vs/editor/editor.main'], function() {
-            monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-                target: monaco.languages.typescript.ScriptTarget.ES2020,
-                allowNonTsExtensions: true,
-                lib: ["es2020", "dom", "dom.iterable"]
-            });
-            window.monaco = monaco;
-        });
-    </script>
-    <script src="./main.js" type="module"></script>
     <link rel="stylesheet" type="text/css" href="./style.less" />
+    <script src="./main.js" type="module"></script>
 </head>
 <body>
     <div id="grid">
@@ -38,7 +23,37 @@
                 </select>
             </label>
         </div>
+
         <div id="monaco"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/loader.js"></script>
+        <script>
+            window.MonacoEnvironment = {
+                getWorker: () =>
+                    new Worker("data:text/javascript;charset=utf-8," + encodeURIComponent(`
+                        self.MonacoEnvironment = {
+                            baseUrl: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/'
+                        };
+                        importScripts('https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/base/worker/workerMain.js');
+                    `))
+            };
+
+            require.config({ 
+                paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs' } 
+            });
+            
+            window.monacoPromise = new Promise(resolve => {
+                require(['vs/editor/editor.main'], () => {
+                    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+                        target: monaco.languages.typescript.ScriptTarget.ES2020,
+                        allowNonTsExtensions: true,
+                        lib: ["es2020", "dom", "dom.iterable"]
+                    });
+                    resolve(monaco);
+                });
+            });
+        </script>
+
         <iframe id="display" src="./display/"></iframe>
         <iframe id="console" src="./console/"></iframe>
     </div>

@@ -1,3 +1,5 @@
+const monaco = await window.monacoPromise;
+
 await fetch("https://raw.githubusercontent.com/chipdesk/chipdesk.github.io/main/src/res/theme/github-dark-default.json")
     .then(response => response.json())
     .then(theme => monaco.editor.defineTheme("github-dark-default", theme));
