@@ -24,6 +24,20 @@
 </head>
 <body>
     <div id="grid">
+        <div id="options">
+            <label>
+                Module
+                <input id=":options.module" type="checkbox" />
+            </label>
+            <label>
+                IIFE
+                <select id=":options.iife">
+                    <option value="none">Top-level</option>
+                    <option value="sync">Sync</option>
+                    <option value="async">Async</option>
+                </select>
+            </label>
+        </div>
         <div id="monaco"></div>
         <iframe id="display" src="./display/"></iframe>
         <iframe id="console" src="./console/"></iframe>

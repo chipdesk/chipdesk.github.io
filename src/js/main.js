@@ -20,8 +20,8 @@ window.addEventListener("load", async () => {
             action: "execute",
             content: editor.getValue(),
             script: {
-                module: false,
-                iife: "async"
+                module: document.getElementById(":options.module").checked,
+                iife: document.getElementById(":options.iife").value
             }
         })
     );

@@ -1,3 +1,5 @@
+@import "../font/Fira_Code.css";
+
 :root, body {
     margin: 0;
     height: 100%;
@@ -7,8 +9,9 @@
 #grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 0.1fr 1fr 2fr;
     grid-template-areas:
+        "options options"
         "monaco display"
         "monaco console"
     ;
@@ -17,11 +20,24 @@
     height: 100%;
 }
 
-@panels: monaco, display, console;
+#options {
+    background-color: #010409;
+    border-bottom: 1px solid #30363d;
 
-each(@panels, {
-    #@{value} { grid-area: @value }
-});
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    > label {
+        color: #e6edf3;
+        font-family: "Fira Code", Menlo, Monaco, "Courier New", monospace;
+
+        padding-right: 16px;
+    }
+}
 
 iframe {
     width: 100%;
@@ -29,3 +45,9 @@ iframe {
 
     border: none;
 }
+
+@panels: options, monaco, display, console;
+
+each(@panels, {
+    #@{value} { grid-area: @value }
+});

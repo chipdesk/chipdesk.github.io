@@ -64,8 +64,8 @@ window.addEventListener("message", ({ data }) => {
             logger[data.method](...data.args);
         } break;
         case "return": {
-            output("return", stringify(data.content ?? "undefined"));
+            if (data.content !== undefined)
+            output("return", stringify(data.content ?? "null"));
         } break;
     }
 });
-
