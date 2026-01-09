@@ -4,35 +4,37 @@ await fetch("https://raw.githubusercontent.com/chipdesk/chipdesk.github.io/main/
     .then(response => response.json())
     .then(theme => monaco.editor.defineTheme("github-dark-default", theme));
 
-window.addEventListener("load", async () => {
-    const editor = monaco.editor.create(document.getElementById("monaco"), {
-        language: "javascript",
-        theme: "github-dark-default",
-        minimap: {
-            enabled: false
-        }
-    });
+if (document.readyState === 'loading') {
+    await new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
+}
 
-    const display = document.getElementById("display");
-    const logs = document.getElementById("console");
-    
-    editor.addCommand(
-        monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-        () => display.contentWindow.postMessage({
-            action: "execute",
-            content: editor.getValue(),
-            script: {
-                module: document.getElementById(":options.module").checked,
-                iife: document.getElementById(":options.iife").value
-            }
-        })
-    );
+const editor = monaco.editor.create(document.getElementById("monaco"), {
+    language: "javascript",
+    theme: "github-dark-default",
+    minimap: {
+        enabled: false
+    }
+});
 
-    window.addEventListener("message", ({ data }) => {
-        if (data.recipient) switch (data.recipient) {
-            case "console": {
-                logs.contentWindow.postMessage(data.forward);
-            } break;
+const display = document.getElementById("display");
+const logs = document.getElementById("console");
+
+editor.addCommand(
+    monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
+    () => display.contentWindow.postMessage({
+        action: "execute",
+        content: editor.getValue(),
+        script: {
+            module: document.getElementById(":options.module").checked,
+            iife: document.getElementById(":options.iife").value
         }
-    });
+    })
+);
+
+window.addEventListener("message", ({ data }) => {
+    if (data.recipient) switch (data.recipient) {
+        case "console": {
+            logs.contentWindow.postMessage(data.forward);
+        } break;
+    }
 });
