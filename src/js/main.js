@@ -1,35 +1,22 @@
+const modifierKey =
+    /Macintosh/.test(navigator.userAgent)
+    ? "Meta" : "Control";
+
 const storage = JSON.parse(window.localStorage.getItem("lastEntry"));
-
-const monaco = await window.monacoPromise;
-
-await fetch("../res/theme/github-dark-default.json")
-    .then(response => response.json())
-    .then(theme => monaco.editor.defineTheme("github-dark-default", theme));
-
-if (document.readyState === "loading") {
-    await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
-}
 
 document.getElementById(":options.module").checked = storage?.script.module ?? true;
 document.getElementById(":options.iife").value = storage?.script.iife ?? "top-level";
 
-const editor = monaco.editor.create(document.getElementById("monaco"), {
-    language: "javascript",
-    value: storage?.content ?? "",
-    theme: "github-dark-default",
-    minimap: {
-        enabled: false
-    }
-});
-
+const editor = document.getElementById("editor");
 const display = document.getElementById("display");
 const logs = document.getElementById("console");
 
-editor.addCommand(
-    monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-    () => {
+
+editor.addEventListener("keydown", event => {
+    if (event.getModifierState(modifierKey) && event.code === "Enter") {
+        event.preventDefault();
         const data = {
-            content: editor.getValue(),
+            content: editor.value,
             script: {
                 module: document.getElementById(":options.module").checked,
                 iife: document.getElementById(":options.iife").value
@@ -43,7 +30,7 @@ editor.addCommand(
 
         window.localStorage.setItem("lastEntry", JSON.stringify(data));
     }
-);
+});
 
 window.addEventListener("message", ({ data }) => {
     if (data.recipient) switch (data.recipient) {
