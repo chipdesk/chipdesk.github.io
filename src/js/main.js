@@ -1,17 +1,40 @@
 const ace = window.ace;
 
-const storage = JSON.parse(window.localStorage.getItem("lastEntry"));
+const initial =
+    JSON.parse(window.localStorage.getItem("lastEntry"))
+    ?? {
+        content: (
+`const methods = [
+    { name: "error", what: "an error"    },
+    { name: "warn",  what: "a warning"   },
+    { name: "debug", what: "a debug log" },
+    { name: "log",   what: "a log"       },
+    { name: "info",  what: "an info log" }
+];
+
+console.clear();
+
+for (const { name, what } of methods) {
+    console[name](\`This is \${what}.\`);
+}
+`
+        ),
+        script: {
+            module: true,
+            iife: "top-level"
+        }
+    };
 
 const display = document.getElementById("display");
 const logs = document.getElementById("console");
 const editor = ace.edit("editor", {
     theme: "ace/theme/github_dark",
     mode: "ace/mode/javascript",
-    value: storage.content ?? await fetch("./res/default-content.js").then(r => r.text())
+    value: initial.content
 });
 
-document.getElementById(":options.module").checked = storage?.script.module ?? true;
-document.getElementById(":options.iife").value = storage?.script.iife ?? "top-level";
+document.getElementById(":options.module").checked = initial.script.module ?? true;
+document.getElementById(":options.iife").value = initial.script.iife ?? "top-level";
 
 editor.commands.addCommand({
     name: "execute",
