@@ -65,7 +65,7 @@ window.addEventListener("message", ({ data }) => {
         } break;
         case "return": {
             if (data.content === undefined) break;
-            if (data.content instanceof String)
+            if (typeof data.content === "string")
                 output("return", `"${data.content}"`);
             else
                 output("return", stringify(data.content ?? "null"));
