@@ -64,7 +64,7 @@ window.addEventListener("message", ({ data }) => {
             logger[data.method](...data.args);
         } break;
         case "return": {
-            if (data.content !== undefined) break;
+            if (data.content === undefined) break;
             if (data.content instanceof String)
                 output("return", `"${data.content}"`);
             else
