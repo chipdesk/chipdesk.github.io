@@ -4,13 +4,13 @@ const modifierKey =
 
 const storage = JSON.parse(window.localStorage.getItem("lastEntry"));
 
-document.getElementById(":options.module").checked = storage?.script.module ?? true;
-document.getElementById(":options.iife").value = storage?.script.iife ?? "top-level";
-editor.value = storage.content;
-
 const editor = document.getElementById("editor");
 const display = document.getElementById("display");
 const logs = document.getElementById("console");
+
+document.getElementById(":options.module").checked = storage?.script.module ?? true;
+document.getElementById(":options.iife").value = storage?.script.iife ?? "top-level";
+editor.value = storage.content;
 
 editor.addEventListener("keydown", event => {
     if (event.getModifierState(modifierKey) && event.code === "Enter") {
