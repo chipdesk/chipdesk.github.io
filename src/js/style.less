@@ -12,8 +12,8 @@
     grid-template-rows: 0.1fr 1fr 2fr;
     grid-template-areas:
         "options options"
-        "monaco display"
-        "monaco console"
+        "editor display"
+        "editor console"
     ;
 
     width: 100%;
@@ -50,7 +50,7 @@ iframe, textarea {
     border: none;
 }
 
-@panels: options, monaco, display, console;
+@panels: options, editor, display, console;
 
 each(@panels, {
     #@{value} { grid-area: @value }
