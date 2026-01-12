@@ -1,9 +1,5 @@
 const ace = window.ace;
 
-const modifierKey =
-    /Macintosh/.test(navigator.userAgent)
-    ? "Meta" : "Control";
-
 const storage = JSON.parse(window.localStorage.getItem("lastEntry"));
 
 const display = document.getElementById("display");
