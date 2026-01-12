@@ -6,7 +6,7 @@ const storage = JSON.parse(window.localStorage.getItem("lastEntry"));
 
 document.getElementById(":options.module").checked = storage?.script.module ?? true;
 document.getElementById(":options.iife").value = storage?.script.iife ?? "top-level";
-editor.value = JSON.parse(storage.content);
+editor.value = storage.content;
 
 const editor = document.getElementById("editor");
 const display = document.getElementById("display");
